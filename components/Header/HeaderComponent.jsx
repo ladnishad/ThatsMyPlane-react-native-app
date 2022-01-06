@@ -10,6 +10,7 @@ import {
   TouchableOpacity
 } from "react-native";
 import { Header as HeaderRNE, HeaderProps, Icon } from "react-native-elements";
+import { AppStrings } from "../../assets/app-strings";
 
 export const HeaderComponent = ({ addFlight, setAddFlight }) => {
   return (
@@ -18,7 +19,7 @@ export const HeaderComponent = ({ addFlight, setAddFlight }) => {
         icon: "menu",
         color: "#fff"
       }}
-      centerComponent={{ text: "FlightsApp", style: styles.heading }}
+      centerComponent={{ text: AppStrings["app-name"], style: styles.heading }}
       rightComponent={
         <View style={styles.headerRight}>
           <TouchableOpacity
