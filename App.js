@@ -43,13 +43,18 @@ export default function App() {
         aircraftRegistration: "N27256"
       },
       image: {
-        url: "https://www.flickr.com/photos/icon0/45388005135",
+        url:
+          "https://live.staticflickr.com/65535/51678760730_29d746f4f5_5k.jpg",
         author: "",
         description: ""
       }
     }
   ]);
+
+  const [componentToShow, setComponentToShow] = useState("home");
   const [addFlight, setAddFlight] = useState(false);
+  const [enableSearch, setSearch] = useState(false);
+  const [searchFor, setSearchFor] = useState("");
 
   const handleCloseForm = () => {
     setAddFlight(false);
@@ -66,7 +71,14 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <View>
-        <HeaderComponent addFlight={addFlight} setAddFlight={setAddFlight} />
+        <HeaderComponent
+          addFlight={addFlight}
+          setAddFlight={setAddFlight}
+          enableSearch={enableSearch}
+          setSearch={setSearch}
+          searchFor={searchFor}
+          setSearchFor={setSearchFor}
+        />
         <FlightsListComponent flightsData={flightsData} />
         <ModalComponent
           modalVisible={addFlight}

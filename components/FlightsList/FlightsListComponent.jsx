@@ -49,8 +49,3 @@ export const FlightsListComponent = ({ flightsData }) => {
     </>
   );
 };
-
-//<Icon name="flight-takeoff" />
-
-// <ListItem.Title>{`${flightAirlineInfo.airlineCode} ${flightNumber} (Reg No. ${flightDetails.aircraftRegistration})`}</ListItem.Title>
-// <ListItem.Subtitle>{`${flightDetails.from} - ${flightDetails.to}`}</ListItem.Subtitle>

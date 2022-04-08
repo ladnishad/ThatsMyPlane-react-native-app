@@ -10,7 +10,7 @@ export const FlightCard = ({
   image
 }) => {
   return (
-    <Card style={{ minWidth: 600 }}>
+    <Card borderRadius={20} containerStyle={styles.card}>
       <Card.Title>{`${flightDetails.aircraftRegistration}`}</Card.Title>
       <Card.Divider />
       <Card.Image
@@ -56,5 +56,8 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 16,
     marginTop: 5
+  },
+  card: {
+    minWidth: "95%"
   }
 });

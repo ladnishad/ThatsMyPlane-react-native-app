@@ -1,3 +1,3 @@
 export const AppStrings = {
-  "app-name": "TrackMyFlights"
+  "app-name": "Track My Flights"
 };
