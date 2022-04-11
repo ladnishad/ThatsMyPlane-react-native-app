@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { Icon, SearchBar } from "react-native-elements";
+import { useTheme } from 'react-native-elements';
 
 export const HeaderRightComponent = ({
   color,
@@ -14,18 +15,16 @@ export const HeaderRightComponent = ({
   return (
     <View style={styles.headerRight}>
       <SearchFlightButton
-        color={color}
-        enableSearch={enableSearch}
+       enableSearch={enableSearch}
         setSearch={setSearch}
         searchFor={searchFor}
         setSearchFor={setSearchFor}
       />
       <AddFlightButton
-        color={color}
         addFlight={addFlight}
         setAddFlight={setAddFlight}
       />
-      <NotificationsBell color={color} count={2} />
+      <NotificationsBell count={2} />
     </View>
   );
 };
@@ -40,28 +39,29 @@ const styles = StyleSheet.create({
 });
 
 const SearchFlightButton = ({
-  color,
   enableSearch,
   setSearch,
   searchFor,
   setSearchFor
 }) => {
+  const { theme } = useTheme();
   return (
     <TouchableOpacity
       style={{ marginLeft: 10 }}
       onPress={() => setSearch(!enableSearch)}
     >
-      <Icon type="material" name="search" color={color} />
+      <Icon type="material" name="search" color={theme.colors.header.text} />
     </TouchableOpacity>
   );
 };
-const NotificationsBell = ({ color, count }) => {
+const NotificationsBell = ({  count }) => {
+  const { theme } = useTheme();
   return (
     <TouchableOpacity
       style={{ marginLeft: 10 }}
       onPress={() => console.log("search")}
     >
-      <Icon type="material" name="notifications" color={color} />
+      <Icon type="material" name="notifications" color={theme.colors.header.text} />
     </TouchableOpacity>
   );
 };
@@ -77,16 +77,17 @@ const NotificationsBell = ({ color, count }) => {
 //   );
 // };
 
-const AddFlightButton = ({ color, addFlight, setAddFlight }) => {
+const AddFlightButton = ({  addFlight, setAddFlight }) => {
+  const { theme } = useTheme();
   return (
     <TouchableOpacity
       style={{ marginLeft: 10 }}
       onPress={() => setAddFlight(!addFlight)}
     >
       {addFlight ? (
-        <Icon type="material" name="close" color={color} />
+        <Icon type="material" name="close" color={theme.colors.header.text} />
       ) : (
-        <Icon type="material" name="add" color={color} />
+        <Icon type="material" name="add" color={theme.colors.header.text} />
       )}
     </TouchableOpacity>
   );

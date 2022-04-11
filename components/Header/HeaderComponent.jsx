@@ -15,6 +15,7 @@ import {
   HeaderProps,
   Icon
 } from "react-native-elements";
+import { useTheme } from "react-native-elements";
 
 import { HeaderLeftComponent } from "./HeaderLeft";
 import { HeaderCenterSearchComponent } from "./HeaderCenter";
@@ -30,27 +31,34 @@ export const HeaderComponent = ({
   searchFor,
   setSearchFor
 }) => {
-  console.log(enableSearch);
+  const { theme } = useTheme();
+
   return (
     <HeaderRNE
       barStyle="light-content"
-      containerStyle={{ backgroundColor: "white" }}
+      containerStyle={{ backgroundColor: theme.colors.header.background }}
       leftComponent={{
         icon: "menu",
-        color: "black"
+        color: theme.colors.header.text
       }}
       centerComponent={
         enableSearch
           ? () => (
               <HeaderCenterSearchComponent
-                color="black"
                 enableSearch={enableSearch}
                 setSearch={setSearch}
                 searchFor={searchFor}
                 setSearchFor={setSearchFor}
               />
             )
-          : { text: AppStrings["app-name"], style: styles.heading }
+          : {
+              text: AppStrings["app-name"],
+              style: {
+                color: theme.colors.header.text,
+                fontSize: 22,
+                fontWeight: "bold"
+              }
+            }
       }
       centerContainerStyle={{
         justifyContent: "flex-start",
@@ -58,7 +66,6 @@ export const HeaderComponent = ({
       }}
       rightComponent={() => (
         <HeaderRightComponent
-          color="black"
           addFlight={addFlight}
           setAddFlight={setAddFlight}
           enableSearch={enableSearch}
@@ -70,11 +77,3 @@ export const HeaderComponent = ({
     />
   );
 };
-
-const styles = StyleSheet.create({
-  heading: {
-    color: "black",
-    fontSize: 22,
-    fontWeight: "bold"
-  }
-});

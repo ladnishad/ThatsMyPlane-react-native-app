@@ -1,17 +1,31 @@
-import { Tab } from "react-native-elements";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Text, View } from "react-native";
+import { FlightsListComponent } from "../FlightsList/FlightsListComponent";
 
-export const AppTabs = ({ componentToShow, setComponentToShow }) => {
+const Tab = createBottomTabNavigator();
+
+const DiscoverScreen = () => {
   return (
-    <TabView value={componentToShow} onChange={setComponentToShow}>
-      <TabView.Item style={{ backgroundColor: "red", width: "100%" }}>
-        <Text h1>Home</Text>
-      </TabView.Item>
-      <TabView.Item style={{ backgroundColor: "blue", width: "100%" }}>
-        <Text h1>Discover</Text>
-      </TabView.Item>
-      <TabView.Item style={{ backgroundColor: "green", width: "100%" }}>
-        <Text h1>Account</Text>
-      </TabView.Item>
-    </TabView>
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <Text>Discover!</Text>
+    </View>
+  );
+};
+
+export const FooterTabs = ({ flightsData }) => {
+  return (
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false
+      }}
+    >
+      <Tab.Screen name="Home">
+        {() => <FlightsListComponent flightsData={flightsData} />}
+      </Tab.Screen>
+      <Tab.Screen name="Discover">{() => <DiscoverScreen />}</Tab.Screen>
+      <Tab.Screen name="Account">
+        {() => <FlightsListComponent flightsData={flightsData} />}
+      </Tab.Screen>
+    </Tab.Navigator>
   );
 };

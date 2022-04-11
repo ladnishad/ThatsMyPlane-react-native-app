@@ -1,11 +1,19 @@
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
+import { useColorScheme } from "react-native-appearance";
+import { ThemeProvider } from "react-native-elements";
 import { StyleSheet, Text, View } from "react-native";
 import { HeaderComponent } from "./components/Header/HeaderComponent";
+import { FooterTabs } from "./components/FooterTabs/AppTabs";
 import { DialogComponent } from "./components/AddFlightForm/FormDialogComponent";
 import ModalComponent from "./components/AddFlightForm/ModalComponent";
 import { FlightsListComponent } from "./components/FlightsList/FlightsListComponent";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import {
+  NavigationContainer,
+  DefaultTheme,
+  DarkTheme
+} from "@react-navigation/native";
 import { useFonts } from "expo-font";
 
 export default function App() {
@@ -29,7 +37,43 @@ export default function App() {
     { airline: "Southwest", code: "WN" }
   ]);
 
+  // let colorScheme = useColorScheme();
+  let colorScheme = "light";
+  const theme = {
+    colors: {
+      palletteType: colorScheme === "dark" ? "dark" : "light",
+      header: {
+        background: colorScheme === "dark" ? "#000000" : "#FFFFFF",
+        text: colorScheme === "dark" ? "#FFFFFF" : "#000000"
+      },
+      footer: {
+        background: colorScheme === "dark" ? "#000000" : "#FFFFFF",
+        text: colorScheme === "dark" ? "#FFFFFF" : "#000000"
+      }
+    }
+  };
+
+  const [componentIndex, setComponentIndex] = useState(0);
   const [flightsData, setFlightsData] = useState([
+    {
+      flightAirlineInfo: {
+        airlineCode: "UA",
+        airline: "United Airlines"
+      },
+      flightDate: 1641340800000,
+      flightNumber: "1281",
+      flightDetails: {
+        from: "EWR",
+        to: "DFW",
+        aircraftRegistration: "N27256"
+      },
+      image: {
+        url:
+          "https://live.staticflickr.com/65535/51678760730_29d746f4f5_5k.jpg",
+        author: "",
+        description: ""
+      }
+    },
     {
       flightAirlineInfo: {
         airlineCode: "UA",
@@ -51,7 +95,6 @@ export default function App() {
     }
   ]);
 
-  const [componentToShow, setComponentToShow] = useState("home");
   const [addFlight, setAddFlight] = useState(false);
   const [enableSearch, setSearch] = useState(false);
   const [searchFor, setSearchFor] = useState("");
@@ -69,25 +112,31 @@ export default function App() {
   }
 
   return (
-    <SafeAreaProvider>
-      <View>
-        <HeaderComponent
-          addFlight={addFlight}
-          setAddFlight={setAddFlight}
-          enableSearch={enableSearch}
-          setSearch={setSearch}
-          searchFor={searchFor}
-          setSearchFor={setSearchFor}
-        />
-        <FlightsListComponent flightsData={flightsData} />
-        <ModalComponent
-          modalVisible={addFlight}
-          setModalVisible={handleCloseForm}
-          flightsData={flightsData}
-          setFlightsData={setFlightsData}
-        />
-      </View>
-    </SafeAreaProvider>
+    <NavigationContainer
+      theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+    >
+      <ThemeProvider useDark={colorScheme === "dark"} theme={theme}>
+        <SafeAreaProvider>
+          <View style={{ flex: 1 }}>
+            <HeaderComponent
+              addFlight={addFlight}
+              setAddFlight={setAddFlight}
+              enableSearch={enableSearch}
+              setSearch={setSearch}
+              searchFor={searchFor}
+              setSearchFor={setSearchFor}
+            />
+            <FooterTabs flightsData={flightsData} />
+            <ModalComponent
+              modalVisible={addFlight}
+              setModalVisible={handleCloseForm}
+              flightsData={flightsData}
+              setFlightsData={setFlightsData}
+            />
+          </View>
+        </SafeAreaProvider>
+      </ThemeProvider>
+    </NavigationContainer>
   );
 }
 

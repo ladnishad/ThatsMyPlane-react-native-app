@@ -15,37 +15,35 @@ import {
 
 export const FlightsListComponent = ({ flightsData }) => {
   return (
-    <>
-      <ScrollView>
-        <View>
-          {flightsData.map(
-            (
-              {
-                flightAirlineInfo,
-                flightDate,
-                flightNumber,
-                flightDetails,
-                image
-              },
-              i
-            ) => {
-              return (
-                <ListItem key={i}>
-                  <ListItem.Content>
-                    <FlightCard
-                      flightAirlineInfo={flightAirlineInfo}
-                      flightDate={flightDate}
-                      flightNumber={flightNumber}
-                      flightDetails={flightDetails}
-                      image={image}
-                    />
-                  </ListItem.Content>
-                </ListItem>
-              );
-            }
-          )}
-        </View>
-      </ScrollView>
-    </>
+    <ScrollView>
+      <View>
+        {flightsData.map(
+          (
+            {
+              flightAirlineInfo,
+              flightDate,
+              flightNumber,
+              flightDetails,
+              image
+            },
+            i
+          ) => {
+            return (
+              <ListItem key={i}>
+                <ListItem.Content>
+                  <FlightCard
+                    flightAirlineInfo={flightAirlineInfo}
+                    flightDate={flightDate}
+                    flightNumber={flightNumber}
+                    flightDetails={flightDetails}
+                    image={image}
+                  />
+                </ListItem.Content>
+              </ListItem>
+            );
+          }
+        )}
+      </View>
+    </ScrollView>
   );
 };
