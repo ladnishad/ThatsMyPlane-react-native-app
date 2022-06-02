@@ -1,4 +1,4 @@
-# # ThatsMyPlane Mobile app
+# ThatsMyPlane Mobile app
 
 Add your flight details to the app and the app will notify you whenever you fly on the same aircraft!
 
